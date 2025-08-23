@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+  const targetValue = (e) => {
+    setInput(e.target.value);
+  };
+
+  const [input, setInput] = useState("");
+  console.log(input);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input
+        value={input}
+        type="text"
+        placeholder="Enter the list"
+        onChange={targetValue}
+      />
     </div>
   );
 }
