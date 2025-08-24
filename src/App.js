@@ -6,8 +6,17 @@ function App() {
     setInput(e.target.value);
   };
 
+  const newTodo = () => {};
+
   const [input, setInput] = useState("");
-  console.log(input);
+  const [todos, setTodos] = useState([
+    {
+      id: 1,
+      text: input,
+      completed: false,
+    },
+  ]);
+
   return (
     <div className="App">
       <input
@@ -16,6 +25,18 @@ function App() {
         placeholder="Enter the list"
         onChange={targetValue}
       />
+
+      <button onClick={newTodo}>Add</button>
+
+      <ul>
+        {todos.map((item) => (
+          <li>
+            <input type="checkbox" />
+            <span>{item.text}</span>
+            <button>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
