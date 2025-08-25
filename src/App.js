@@ -6,7 +6,9 @@ function App() {
     setInput(e.target.value);
   };
 
-  const newTodo = () => {};
+  const newTodo = () => {
+    setTodos((prev) => [...prev]);
+  };
 
   const [input, setInput] = useState("");
   const [todos, setTodos] = useState([
