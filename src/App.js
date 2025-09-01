@@ -11,7 +11,7 @@ function App() {
       text: input,
       completed: false,
     };
-    setTodoList([...todoList, item]);
+    setTodoList((prev) => [...prev, item]);
     setInput("");
   };
 
