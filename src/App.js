@@ -1,41 +1,43 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 
 function App() {
-  const targetValue = (e) => {
-    setInput(e.target.value);
-  };
-
+  const [todoList, setTodoList] = useState([]);
   const [input, setInput] = useState("");
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
+
+  const addTodoItem = () => {
+    const item = {
+      id: 0,
       text: input,
       completed: false,
-    },
-  ]);
+    };
+    setTodoList([...todoList, item]);
+    setInput("");
+  };
 
   return (
-    <div className="App">
-      <input
-        value={input}
-        type="text"
-        placeholder="Enter the list"
-        onChange={targetValue}
-      />
-
-      <button onClick={newTodo}>Add</button>
+    <>
+      <div>
+        <input
+          className="border border-black m-2 px-2"
+          onChange={(e) => setInput(e.target.value)}
+          type="text"
+          placeholder="enter todo"
+          value={input}
+        />
+        <button onClick={addTodoItem}>Add</button>
+      </div>
 
       <ul>
-        {todos.map((item) => (
-          <li>
+        {todoList.map((item) => (
+          <li className="p-2" key={item.id}>
             <input type="checkbox" />
             <span>{item.text}</span>
             <button>Delete</button>
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }
 
