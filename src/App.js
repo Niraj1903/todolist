@@ -9,7 +9,7 @@ function App() {
     if (input.trim() === "") return;
     const newItem = {
       id: todoList.length + 1,
-      item: input,
+      item: input.trim(),
       completed: false,
     };
     setTodoList((prev) => [...prev, newItem]);
@@ -37,26 +37,60 @@ function App() {
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="Enter your Todo"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={() => addTodoItem()}>Add</button>
-      <ul>
-        {todoList.map((t) => (
-          <li key={t.id}>
+      <div className="min-h-screen bg-gradient-to-br from-[#3b2667] to-[#bc78ec] flex items-center justify-center">
+        <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            To-Do List{" "}
+            <span role="img" aria-label="notepad">
+              📝
+            </span>
+          </h2>
+
+          <div className="flex mb-4 overflow-hidden rounded-full bg-gray-100">
             <input
-              onChange={() => toggleCheckbox(t.id)}
-              type="checkbox"
-              checked={t.completed}
+              className="flex-1 px-4 py-2 bg-transparent focus:outline-none"
+              type="text"
+              placeholder="Add your task"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
             />
-            <span className={t.completed ? "line-through" : ""}>{t.item}</span>
-            <button onClick={() => handleDeleteTodo(t.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+            <button
+              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 font-semibold transition duration-200"
+              onClick={addTodoItem}
+            >
+              Add
+            </button>
+          </div>
+
+          <ul className="space-y-2">
+            {todoList.map((t) => (
+              <li key={t.id}>
+                <div className="flex items-center bg-gray-100 rounded-lg p-2">
+                  <input
+                    type="checkbox"
+                    checked={t.completed}
+                    onChange={() => toggleCheckbox(t.id)}
+                    className="mr-3 w-5 h-5"
+                  />
+                  <span
+                    className={`flex-1 text-gray-800 ${
+                      t.completed ? "line-through text-gray-500" : ""
+                    }`}
+                  >
+                    {t.item}
+                  </span>
+                  <button
+                    onClick={() => handleDeleteTodo(t.id)}
+                    className="text-sm bg-red-500 hover:bg-red-600 text-gray-800 px-3 py-1 rounded-md transition"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </>
   );
 }
