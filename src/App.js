@@ -6,7 +6,7 @@ function App() {
   const [todoList, setTodoList] = useState([]);
 
   const addTodoItem = () => {
-    if (input.trim() === "") return;
+    if (input.trim() === "") return setInput("");
     const newItem = {
       id: todoList.length + 1,
       item: input.trim(),
@@ -81,7 +81,7 @@ function App() {
                   </span>
                   <button
                     onClick={() => handleDeleteTodo(t.id)}
-                    className="text-sm bg-red-500 hover:bg-red-600 text-gray-800 px-3 py-1 rounded-md transition"
+                    className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 font-semibold transition duration-200 rounded-lg"
                   >
                     Delete
                   </button>
